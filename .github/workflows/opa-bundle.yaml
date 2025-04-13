@@ -62,7 +62,8 @@ jobs:
     
     opa-apply:
         environment:
-            name: ${{ github.event.inputs.env }}
+            name: ${{ github.event_name == 'workflow_dispatch' && (github.event.inputs.env != '' && github.event.inputs.env || 'dev') || (github.ref == 'refs/heads/main' && 'prod' || 'dev')}}
+            
         runs-on: ubuntu-latest
         needs: opa-bundle
         steps:
