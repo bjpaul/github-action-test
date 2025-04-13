@@ -1,4 +1,6 @@
 name: opa-bundle-ci
+environment:
+    name: dev
 on:
     push:
         branches:
@@ -62,3 +64,7 @@ jobs:
           - name: show previous job output
             run: |
                 echo "OPA Bundle: ${{ needs.opa-bundle.outputs.bundle }}"
+          - name: Print env specific
+            run: |
+                echo "USERNAME: ${{ env.USERNAME }}"
+                echo "PASSWORD: ${{ secrets.PASSWORD }}"
