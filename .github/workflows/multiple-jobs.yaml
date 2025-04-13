@@ -1,0 +1,32 @@
+name: multiple-jobs
+on:
+  workflow_dispatch:
+jobs:
+  job1:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Run job1
+        run: echo "Running job1"
+  job2:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Run job2
+        run: echo "Running job2"
+  job3:
+    needs: job1
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Run job3
+        run: echo "Running job3"
+  job4:
+    needs: [job2,job3]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run job4
+        run: echo ${{ toJson(github) }}
