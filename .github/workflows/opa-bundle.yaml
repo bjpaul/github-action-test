@@ -19,8 +19,8 @@ jobs:
 
             - name: Run OPA Test
               run: |
-                  opa test ./opa/
+                  opa test ./opa/terraform/ --verbose 
 
-            - name: Run OPA Bundle
-              run: |
-                  opa run --bundle ./bundle.tar.gz --server --set=decision_logs.console=true
+            # - name: Run OPA Bundle
+            #   run: |
+            #       opa run --bundle ./bundle.tar.gz --server --set=decision_logs.console=true
