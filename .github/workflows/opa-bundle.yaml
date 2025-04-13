@@ -13,6 +13,8 @@ on:
             - '.github/workflows/opa-bundle.yaml'
             - 'opa/**'
     workflow_dispatch:
+env:
+    HOST: host
 jobs:
     opa-bundle:
         runs-on: ubuntu-latest
@@ -66,5 +68,6 @@ jobs:
                 echo "OPA Bundle: ${{ needs.opa-bundle.outputs.bundle }}"
           - name: Print env specific
             run: |
+                echo "HOST: ${{ env.HOST }}"
                 echo "USERNAME: ${{ env.USERNAME }}"
                 echo "PASSWORD: ${{ secrets.PASSWORD }}"
