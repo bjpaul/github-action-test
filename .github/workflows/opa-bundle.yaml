@@ -33,6 +33,25 @@ jobs:
               run: |
                   opa test ./opa/terraform/ --verbose 
 
-            # - name: Run OPA Bundle
-            #   run: |
-            #       opa run --bundle ./bundle.tar.gz --server --set=decision_logs.console=true
+            - name: Build opa bundle
+              run: |
+                  opa build ./opa/terraform/ 
+            
+            - name: Upload OPA Bundle
+              uses: actions/upload-artifact@v4
+              with:
+                name: opa-bundle
+                path: |
+                  bundle.tar.gz
+    
+    opa-apply:
+        runs-on: ubuntu-latest
+        needs: opa-bundle
+        steps:
+          - name: Download OPA Bundle
+            uses: actions/download-artifact@v4
+            with:
+                name: opa-bundle
+          - name: List files
+            run: |
+                ls -la
