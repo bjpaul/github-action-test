@@ -29,4 +29,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Run job4
-        run: echo ${{ toJson(github) }}
+        # run: echo ${{ toJson(github.) }}
+        run: echo ${{ runner.os }} ${{ github.event_name }} ${{ github.event.action }} ${{ github.actor }} ${{ github.repository }} ${{ github.sha }}
