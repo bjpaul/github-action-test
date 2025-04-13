@@ -67,7 +67,10 @@ jobs:
             run: |
                 echo "OPA Bundle: ${{ needs.opa-bundle.outputs.bundle }}"
           - name: Print env specific
+            env:
+                USERNAME: ${{ vars.USERNAME }}  
+                PASSWORD: ${{ secrets.PASSWORD }}  
             run: |
                 echo "HOST: ${{ env.HOST }}"
                 echo "USERNAME: ${{ env.USERNAME }}"
-                echo "PASSWORD: ${{ secrets.PASSWORD }}"
+                echo "PASSWORD: ${{ env.PASSWORD }}"
