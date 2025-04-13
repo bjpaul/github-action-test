@@ -1,7 +1,7 @@
 package test.main
 
 import rego.v1
-import data.main
+import data.terraform.analysis
 
 test_deleting_resource if {
     testing_input := {
@@ -14,7 +14,7 @@ test_deleting_resource if {
         ]
     }
 
-    main.is_allowed == false
+    analysis.authz == false
         with input as testing_input
 }
 
@@ -29,6 +29,6 @@ test_non_deleting_action if {
         ]
     }
 
-    main.is_allowed == true
+    analysis.authz == true
         with input as testing_input
 }

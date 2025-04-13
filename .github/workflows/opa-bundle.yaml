@@ -1,5 +1,17 @@
 name: opa-bundle-ci
 on:
+    push:
+        branches:
+            - main
+        paths:
+            - '.github/workflows/opa-bundle.yaml'
+            - 'opa/**'
+    pull_request:
+        branches:
+            - main
+        paths:
+            - '.github/workflows/opa-bundle.yaml'
+            - 'opa/**'
     workflow_dispatch:
 jobs:
     opa-bundle:
