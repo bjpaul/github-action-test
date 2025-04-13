@@ -1,1 +1,24 @@
+name: first-action
+on:
+  workflow_dispatch:
+    inputs:
+      name:
+        description: 'Name of the person to greet'
+        required: true
+        default: 'Anonymous'
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Greet Person
+        with:
+          name: ${{ github.event.inputs.name || 'World' }}
+        run: |  
+            echo "Hello, ${{ github.event.inputs.name || 'World' }}!"
+            echo "This is a test action."
+            echo "The current date and time is: $(date)"
+            echo "The current branch is: ${{ github.ref }}"
+            echo "The commit message is: ${{ github.event.head_commit.message }}"
+            echo "The author of the commit is: ${{ github.event.head_commit.author.name }}"
+            echo "The author email of the commit is: ${{ github.event.head_commit.author.email }}"
 
