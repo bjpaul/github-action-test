@@ -5,7 +5,7 @@ jobs:
   status-check:
     runs-on: ubuntu-latest
     steps:
-      - name: Initialize
+      - name: Continue with error
         continue-on-error: true
         run: exit 1
       - name: Sleep and fail
@@ -19,6 +19,6 @@ jobs:
       - name: If cancelled      
         if: ${{ cancelled() }}
         run: echo "This step runs if the workflow was cancelled."
-      - name: If always     
+      - name:  always     
         if: ${{ always() }}
         run: echo "This step runs regardless of the previous step's outcome."
