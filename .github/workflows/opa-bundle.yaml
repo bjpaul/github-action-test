@@ -22,7 +22,6 @@ on:
                 options:
                     - dev
                     - prod
-
 env:
     HOST: host
 jobs:

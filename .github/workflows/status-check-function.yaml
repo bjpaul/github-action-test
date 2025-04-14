@@ -1,0 +1,21 @@
+name: status-check-function
+on:
+  workflow_dispatch:
+jobs:
+  status-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Initial Step
+        run: exit 0
+      - name: If success
+        if: ${{ success() }}
+        run: echo "This step runs if the previous step was successful."
+      - name: If failure    
+        if: ${{ failure() }}
+        run: echo "This step runs if the previous step failed."
+      - name: If cancelled      
+        if: ${{ cancelled() }}
+        run: echo "This step runs if the workflow was cancelled."
+      - name: If always     
+        if: ${{ always() }}
+        run: echo "This step runs regardless of the previous step's outcome."
