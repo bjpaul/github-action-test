@@ -5,7 +5,10 @@ jobs:
   status-check:
     runs-on: ubuntu-latest
     steps:
-      - name: Initial Step
+      - name: Initialize
+        continue-on-error: true
+        run: exit 1
+      - name: Sleep and fail
         run: sleep 20 && exit 1
       - name: If success
         if: ${{ success() }}
