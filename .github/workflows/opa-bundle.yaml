@@ -61,6 +61,7 @@ jobs:
                   bundle.tar.gz
     
     opa-apply:
+        if: github.event_name == 'pull_request'
         environment:
             name: ${{ github.event_name == 'workflow_dispatch' && (github.event.inputs.env != '' && github.event.inputs.env || 'dev') || (github.ref == 'refs/heads/main' && 'prod' || 'dev')}}
             
