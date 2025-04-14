@@ -6,7 +6,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Initial Step
-        run: exit 0
+        run: sleep 20 && exit 1
       - name: If success
         if: ${{ success() }}
         run: echo "This step runs if the previous step was successful."
