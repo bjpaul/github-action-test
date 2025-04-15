@@ -10,6 +10,8 @@ jobs:
     JobA:
       runs-on: ubuntu-latest
       steps:
+        - name: Checkout
+          uses: actions/checkout@v4
         - name: Find Factorial
           uses: ./.github/workflows/find_factorial.yaml
           with:
