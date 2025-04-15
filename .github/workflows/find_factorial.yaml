@@ -1,0 +1,31 @@
+name: find-factorial
+on:
+  workflow_dispatch:
+    inputs:
+      number:
+        description: 'Number to find factorial of'
+        required: true
+        type: number
+  workflow_call:
+    inputs:
+      number:
+        description: 'Number to find factorial of'
+        required: true
+        type: number
+jobs:
+  find_factorial:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Find Factorial
+        id: factorial
+        run: |
+          number=${{ inputs.number }}
+          factorial=1
+          for (( i=1; i<=number; i++ ))
+          do
+            factorial=$((factorial * i))
+          done
+          echo "Factorial of $number is $factorial"
+          echo "::set-output name=factorial::$factorial"
+      - name: Output Result
+        run: echo "The factorial is ${{ steps.factorial.outputs.factorial }}"
