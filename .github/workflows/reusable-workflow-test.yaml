@@ -7,12 +7,7 @@ on:
         required: true
         type: number
 jobs:
-    JobA:
-      runs-on: ubuntu-latest
-      steps:
-        - name: Checkout
-          uses: actions/checkout@v4
-        - name: Find Factorial
-          uses: ./.github/workflows/find_factorial.yaml
-          with:
-            number: ${{ github.event.inputs.number }}
+    find_factorial:
+        uses: ./.github/workflows/find_factorial.yaml
+        with:
+          number: ${{ github.event.inputs.number }}
