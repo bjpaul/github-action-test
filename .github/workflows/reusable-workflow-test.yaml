@@ -7,10 +7,10 @@ on:
         required: true
         type: number
 jobs:
-    name: Job A
-    runs-on: ubuntu-latest
-    steps:
-      - name: Find Factorial
-        uses: .github/workflows/find_factorial.yaml
-        with:
-          number: ${{ github.event.inputs.number }}
+    JobA:
+      runs-on: ubuntu-latest
+      steps:
+        - name: Find Factorial
+          uses: .github/workflows/find_factorial.yaml
+          with:
+            number: ${{ github.event.inputs.number }}
