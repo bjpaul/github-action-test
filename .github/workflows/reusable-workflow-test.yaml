@@ -11,6 +11,6 @@ jobs:
       runs-on: ubuntu-latest
       steps:
         - name: Find Factorial
-          uses: .github/workflows/find_factorial.yaml
+          uses: ./.github/workflows/find_factorial.yaml
           with:
             number: ${{ github.event.inputs.number }}
