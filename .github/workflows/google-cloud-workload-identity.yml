@@ -19,12 +19,15 @@ jobs:
           workload_identity_provider: 'projects/307894880056/locations/global/workloadIdentityPools/oidc-pool/providers/github-actions'
           service_account: 'gihub-service-account@compute-0fa3ddfe.iam.gserviceaccount.com'
 
-      - name: "Setup Cloud SDK"
+      - name: 'Set up Cloud SDK'
         uses: 'google-github-actions/setup-gcloud@v2'
         with:
           project_id: "compute-0fa3ddfe"
 
-      - name: 'List buckets in project'
-        run: |
-          # gcloud auth list
-          gsutil ls -p compute-0fa3ddfe
+      - name: 'Use gcloud CLI'
+        run: 'gcloud auth list --filter=status:ACTIVE --format="value(account)"'
+
+      # - name: 'List buckets in project'
+      #   run: |
+      #     # gcloud auth list
+      #     gsutil ls -p compute-0fa3ddfe
