@@ -9,15 +9,17 @@ jobs:
   show-oidc:
     runs-on: ubuntu-latest
     steps:
-      - name: Request OIDC Token
-        id: oidc
-        run: |
-          echo "OIDC_TOKEN=$(curl -s -H 'Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN' \
-            "$ACTIONS_ID_TOKEN_REQUEST_URL")" >> $GITHUB_ENV
-
-      - name: Decode OIDC Token
-        run: |
-          echo "$OIDC_TOKEN" | jq -R 'split(".") | .[1] | @base64d | fromjson'
+    - name: Request OIDC Token
+      id: get_token
+      run: |
+        curl -s -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" \
+          "$ACTIONS_ID_TOKEN_REQUEST_URL" > oidc.json
+        cat oidc.json
+        echo "OIDC_TOKEN=$(jq -r '.value' < oidc.json)" >> $GITHUB_ENV
+    
+    - name: Decode OIDC Token
+      run: |
+        echo "$OIDC_TOKEN" | cut -d '.' -f2 | base64 -d | jq
   Get_OIDC_ID_token:
     runs-on: ubuntu-latest
     steps:
