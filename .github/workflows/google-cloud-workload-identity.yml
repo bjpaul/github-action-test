@@ -21,8 +21,10 @@ jobs:
 
       - name: "Setup Cloud SDK"
         uses: 'google-github-actions/setup-gcloud@v2'
+        with:
+          project_id: "compute-0fa3ddfe"
 
       - name: 'List buckets in project'
         run: |
-          gcloud auth list
+          # gcloud auth list
           gsutil ls -p compute-0fa3ddfe
