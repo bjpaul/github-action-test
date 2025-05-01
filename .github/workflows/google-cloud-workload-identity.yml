@@ -9,23 +9,20 @@ jobs:
   Get_OIDC_ID_token:
     runs-on: ubuntu-latest
     steps:
-    - uses: 'actions/checkout@v4'
-    - id: 'auth'
-      name: 'Authenticate to GCP'
-      uses: 'google-github-actions/auth@v2'
-      with:
-          # create_credentials_file: 'true'
+      - uses: actions/checkout@v4
+
+      - id: 'auth'
+        name: 'Authenticate to GCP'
+        uses: 'google-github-actions/auth@v2'
+        with:
           project_id: "compute-0fa3ddfe"
           workload_identity_provider: 'projects/307894880056/locations/global/workloadIdentityPools/oidc-pool/providers/github-actions'
           service_account: 'gihub-service-account@compute-0fa3ddfe.iam.gserviceaccount.com'
-    - name: "Setup Cloud SDK"
-      uses: 'google-github-actions/setup-gcloud@v2'
-      with:
-        skip_install: true
 
-    - id: 'gcloud'
-      name: 'gcloud'
-      run: |-
-        # gcloud auth login --brief --cred-file="${{ steps.auth.outputs.credentials_file_path }}"
-        gcloud auth list
-        gsutil ls -p compute-0fa3ddfe 
+      - name: "Setup Cloud SDK"
+        uses: 'google-github-actions/setup-gcloud@v2'
+
+      - name: 'List buckets in project'
+        run: |
+          gcloud auth list
+          gsutil ls -p compute-0fa3ddfe
