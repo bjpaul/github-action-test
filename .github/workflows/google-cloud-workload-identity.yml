@@ -15,10 +15,10 @@ jobs:
       uses: 'google-github-actions/auth@v2'
       with:
           create_credentials_file: 'true'
-          workload_identity_provider: 'projects/1056328467532/locations/global/workloadIdentityPools/github-action-runner/providers/github'
-          service_account: '1056328467532-compute@developer.gserviceaccount.com'
+          workload_identity_provider: 'projects/307894880056/locations/global/workloadIdentityPools/oidc-pool/providers/github-actions'
+          service_account: 'gihub-service-account@compute-0fa3ddfe.iam.gserviceaccount.com'
     - id: 'gcloud'
       name: 'gcloud'
       run: |-
         gcloud auth login --brief --cred-file="${{ steps.auth.outputs.credentials_file_path }}"
-        gcloud auth list
+        gsutil ls -p compute-0fa3ddfe 
